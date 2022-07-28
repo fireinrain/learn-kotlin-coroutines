@@ -1,6 +1,4 @@
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 /**
 @Description:
@@ -11,16 +9,26 @@ import kotlinx.coroutines.withContext
 @Time    : 2022/7/28 12:25 PM
  */
 
-suspend fun main(args: Array<String>) {
-    // runBlocking {
-    //     delay(10000)
-    // }
-
-    withContext(Dispatchers.IO) {
-        delay(10000)
+fun main(args: Array<String>) {
+    runBlocking {
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            delay(1000)
+            println(Thread.currentThread().getName())
+            val test = test()
+            println(test)
+        }
+        job.join()
     }
 
     println("end")
 
 
+}
+
+suspend fun test(): String {
+    withContext(Dispatchers.Unconfined) {
+        delay(1000)
+        println(Thread.currentThread().getName() + "    test")
+    }
+    return "test"
 }
