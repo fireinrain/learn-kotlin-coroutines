@@ -41,6 +41,8 @@ class OkhttpTest {
     }
 
 
+    // 提问  这是一个suspend function 吗
+    // idea 提示我可以删除suspend关键字
     suspend fun fetchBaidu(coroutineScope: CoroutineScope): Deferred<String?> {
         val deferred = coroutineScope.async {
             val url = Request.Builder().url("https://baidu.com").get().build()
