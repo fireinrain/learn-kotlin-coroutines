@@ -86,3 +86,28 @@ suspend fun add2(a: Int, b: Int): Int {
 //
 
 
+// Structured Concurrency
+// 这种利用scope将协程结构化组织起来的机制, 被称为"structured concurrency".
+// 好处是:
+//
+// scope自动负责子协程, 子协程的生命和scope绑定.
+// scope可以自动取消所有的子协程.
+// scope自动等待所有的子协程结束. 如果scope和一个parent协程绑定, 父协程会等待这个scope中所有的子协程完成.
+//
+// 通过这种结构化的并发模式: 我们可以在创建top级别的协程时, 指定主要的context一次, 所有嵌套的协程会自动继承这个context, 只在有需要的时候进行修改即可.
+// GlobalScope: daemon
+// GlobalScope启动的协程都是独立的, 它们的生命只受到application的限制. 即GlobalScope启动的协程没有parent, 和它被启动时所在的外部的scope没有关系.
+// launch(Dispatchers.Default) { ... }和GlobalScope.launch { ... }用的dispatcher是一样的.
+// GlobalScope启动的协程并不会保持进程活跃. 它们就像daemon threads(守护线程)一样, 如果JVM发现没有其他一般的线程, 就会关闭.
+//
+
+// Key takeaways
+//
+// Coroutine协程机制: suspend, resume, 简化回调代码.
+// suspend方法.
+// 启动协程的几种方法.
+// Dispatcher指定线程.
+// Structured Concurrency: 依靠scope来架构化管理协程.
+//
+
+
