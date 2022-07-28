@@ -14,6 +14,9 @@ repositories {
 dependencies {
     // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    // support for Dispatchers.Main
+    // 没有安卓环境 无法使用
+    // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     testImplementation(kotlin("test"))
 }
 
