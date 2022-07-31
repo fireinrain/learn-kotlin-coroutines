@@ -45,7 +45,7 @@ class OkhttpTest {
     // idea 提示我可以删除suspend关键字
     suspend fun fetchBaidu(coroutineScope: CoroutineScope): Deferred<String?> {
         val deferred = coroutineScope.async {
-            val url = Request.Builder().url("https://baidu.com").get().build()
+            val url = Request.Builder().url("http://nodejs.cn/api/").get().build()
             val okHttpClient = OkHttpClient()
             val respStr = okHttpClient.newCall(url).execute().body?.string()
             respStr
