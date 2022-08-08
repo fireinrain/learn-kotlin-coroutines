@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 @Time    : 2022/8/6 9:08 PM
  */
 
-fun main(args: Array<String>) = runBlocking {
+fun main(args: Array<String>): Unit = runBlocking {
     val channel = Channel<Int>()
     launch(Dispatchers.IO) {
         for (i in 0 until 10) {
@@ -22,11 +22,18 @@ fun main(args: Array<String>) = runBlocking {
         }
     }
 
-    repeat(5) {
-        println(channel.receive())
-    }
+    // repeat(5) {
+    //     println(channel.receive())
+    // }
+    //
+    // println("done")
 
-    println("done")
+    launch(Dispatchers.Default) {
+        val data = channel.receive()
+        if (data % 4 == 0) {
+            println("data is: $data-----${Thread.currentThread().name}")
+        }
+    }
 
 
 }
